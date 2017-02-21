@@ -85,6 +85,12 @@ open class UPCarouselFlowLayout: UICollectionViewFlowLayout {
         return attributes.map({ self.transformLayoutAttributes($0) })
     }
     
+    override open func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        guard let superAttributes = super.layoutAttributesForItem(at: indexPath)
+            else { return nil }
+        return self.transformLayoutAttributes(superAttributes)
+    }
+    
     fileprivate func transformLayoutAttributes(_ attributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
         guard let collectionView = self.collectionView else { return attributes }
         let isHorizontal = (self.scrollDirection == .horizontal)
